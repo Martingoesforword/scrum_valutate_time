@@ -2,7 +2,10 @@
   <nz-list nzBordered nzHeader="------冲刺の伙伴们------" *ngIf="playerService.allPlayers">
     <nz-list-item *ngFor="let player of this.playerService.allPlayers">
       {{ player.name }}
-      <nz-tag *ngIf="player.voteValue == 0" [nzColor]="'red'">我还没估时呢</nz-tag>
+      <nz-tag *ngIf="player.voteValue == 0" [nzColor]="'red'">
+        <tag *ngIf="playerService.username !== '管理员'" id="valuate_time">我还没估时呢</tag>
+        <tag *ngIf="playerService.username === '管理员'" id="valuate_time">我不需要估时</tag>
+      </nz-tag>
       <nz-tag *ngIf="player.voteValue != 0" [nzColor]="'green'">
         <tag *ngIf="playerService.username !== '管理员' && playerService.username === player.name" id="valuate_time">我估时 {{player.voteValue}} 小时</tag>
         <tag *ngIf="playerService.username !== '管理员' && playerService.username !== player.name" id="valuate_time">我已经估时了</tag>
