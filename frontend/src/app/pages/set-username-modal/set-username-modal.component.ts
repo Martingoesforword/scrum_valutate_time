@@ -14,7 +14,8 @@ export class SetUsernameModalComponent implements OnInit {
   constructor(public playerService: PlayerService, private fb: FormBuilder) {
     this.isVisible = true;
     this.usernameForm = this.fb.group({
-      username: [null, Validators.required]
+      username: [null, Validators.required],
+      roomId: [null, Validators.required]
     });
   }
 
@@ -25,6 +26,7 @@ export class SetUsernameModalComponent implements OnInit {
   handleOk(value: any): void {
     if (this.usernameForm.valid){
       this.playerService.username = value.username;
+      this.playerService.roomId = value.roomId;
       this.isVisible = false;
       this.playerService.sendVote(0);
     }

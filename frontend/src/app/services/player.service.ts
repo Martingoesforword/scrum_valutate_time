@@ -6,6 +6,8 @@ import {NzMessageService} from 'ng-zorro-antd/message';
   providedIn: 'root',
 })
 export class PlayerService {
+  manager: string;
+  roomId: Number;
   username: string;
   allPlayers: Array<any>;
   cardValueIsShown: boolean;
@@ -22,8 +24,10 @@ export class PlayerService {
     this.possibleValues = [1, 2, 3, 5, 8, 13, 21];
     this.currentSelfValue = 0;
 
-    this.socket.on('allVotes', (allVotes) => {
-      this.allPlayers = allVotes;
+    this.socket.on('allVotes', (info) => {
+      this.allPlayers = info['allVotes'];
+      this.roomId = info['roomId'];
+      this.manager = info['manager'] || this.manager;
     });
 
     this.socket.on('showCards', () => {
@@ -39,16 +43,21 @@ export class PlayerService {
     this.cardValueIsShown = false;
   }
 
+  showSetRoomId(): void {
+    //打开roomid填写框
+  }
+
   sendVote(value: number): void {
     if (!this.cardValueIsShown) {
       this.socket.emit('vote', {
         name: this.username,
         voteValue: value,
+        roomId: this.roomId
       });
       this.currentSelfValue = value;
 
       if (value !== 0) {
-        this.message.success('Vote submitted');
+        this.message.success('提交估时成功！');
       }
 
     } else {
@@ -57,16 +66,25 @@ export class PlayerService {
   }
 
   showCards(): void {
-    this.socket.emit('showCards');
+    this.socket.emit('showCards',{
+      name: this.username,
+      roomId: this.roomId
+    });
   }
 
   resetGame(): void {
-    this.socket.emit('reset');
+    this.socket.emit('reset',{
+      name: this.username,
+      roomId: this.roomId
+    });
     this.currentSelfValue = 0;
   }
 
   resetVotes(): void {
-    this.socket.emit('resetVotes');
+    this.socket.emit('resetVotes',{
+      name: this.username,
+      roomId: this.roomId
+    });
     this.currentSelfValue = 0;
   }
 
@@ -95,7 +113,7 @@ export class PlayerService {
         this.results2 += player.voteValue;
       }
     });
-    this.results2 = this.results2 / (this.num);
+    this.results2 = this.results2 / (this.num) || 0;
 
   }
 }

@@ -1,8 +1,9 @@
-<nz-modal [(nzVisible)]="isVisible" nzTitle="你的名字是" [nzClosable]="false" [nzCancelText]="null" (nzOnOk)="handleOk(this.usernameForm.value)">
+<nz-modal [(nzVisible)]="isVisible" nzTitle="请输入 你的名字 和 你想创建/加入的房间名" [nzClosable]="false" [nzCancelText]="null" (nzOnOk)="handleOk(this.usernameForm.value)">
   <ng-container>
     <form nz-form (ngSubmit)="handleOk(this.usernameForm.value)" [formGroup]="usernameForm">
       <nz-form-item>
-        <input  formControlName="username" nz-input type="text" placeholder="Username">
+        <input  formControlName="username" nz-input type="text" placeholder="Username" style="margin-bottom: 1vh">
+        <input  formControlName="roomId" nz-input type="text" placeholder="roomName">
       </nz-form-item>
     </form>
   </ng-container>

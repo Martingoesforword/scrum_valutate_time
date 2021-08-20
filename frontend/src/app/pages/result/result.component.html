@@ -16,5 +16,5 @@
 
 </nz-card>
 <ng-template #extraTemplate>
-  <a id="resulttt" style="{'visibility: '+ (this.playerService.username === '管理员'? 'hidden' : 'visible')}">平均估时结果： {{this.playerService.results2}}</a>
+  <a id="resulttt" style="{'visibility: '+ (this.playerService.username === this.playerService.manager? 'hidden' : 'visible')}">平均估时结果： {{this.playerService.results2}}小时</a>
 </ng-template>

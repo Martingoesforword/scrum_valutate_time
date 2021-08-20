@@ -2,6 +2,7 @@
   <nz-header>
     <span *ngIf="playerService.username == null" style="color: white">网梯估时系统</span>
     <span *ngIf="playerService.username != null " style="color: white">Hallo {{playerService.username}}! 欢迎来到网梯估时系统</span>
+    <span *ngIf="playerService.roomId" style="color: white"> 当前房间号：{{playerService.roomId}}</span>
   </nz-header>
   <nz-content>
     <app-set-username-modal></app-set-username-modal>

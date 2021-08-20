@@ -3,17 +3,19 @@
     <nz-list-item *ngFor="let player of this.playerService.allPlayers">
       {{ player.name }}
       <nz-tag *ngIf="player.voteValue == 0" [nzColor]="'red'">
-        <tag *ngIf="playerService.username !== '管理员'" id="valuate_time">我还没估时呢</tag>
-        <tag *ngIf="playerService.username === '管理员'" id="valuate_time">我不需要估时</tag>
+        <tag *ngIf="player.name !== this.playerService.manager && player.name === this.playerService.username" id="valuate_time">我还没估时呢</tag>
+        <tag *ngIf="player.name !== this.playerService.manager && player.name !== this.playerService.username" id="valuate_time">此人还没估时呢</tag>
+        <tag *ngIf="player.name === this.playerService.manager && player.name !== this.playerService.username" id="valuate_time">他是管理员 不需要估时</tag>
+        <tag *ngIf="player.name === this.playerService.manager && player.name === this.playerService.username" id="valuate_time">我是管理员 不需要估时</tag>
       </nz-tag>
       <nz-tag *ngIf="player.voteValue != 0" [nzColor]="'green'">
-        <tag *ngIf="playerService.username !== '管理员' && playerService.username === player.name" id="valuate_time">我估时 {{player.voteValue}} 小时</tag>
-        <tag *ngIf="playerService.username !== '管理员' && playerService.username !== player.name" id="valuate_time">我已经估时了</tag>
-        <tag *ngIf="playerService.username === '管理员'" id="valuate_time">此人估时为 {{player.voteValue}} 小时</tag>
+        <tag *ngIf="this.playerService.username === player.name" id="valuate_time">我估时 {{player.voteValue}} 小时</tag>
+        <tag *ngIf="this.playerService.username !== this.playerService.manager && this.playerService.username !== player.name" id="valuate_time">此人已经估时了</tag>
+        <tag *ngIf="this.playerService.username === this.playerService.manager && this.playerService.username !== player.name" id="valuate_time">此人估时为 {{player.voteValue}} 小时</tag>
       </nz-tag>
     </nz-list-item>
   </nz-list>
-  <div *ngIf="playerService.username === '管理员'" style="margin-top: 2vh">
+  <div *ngIf="playerService.username === this.playerService.manager" style="margin-top: 2vh">
     <button nz-button nzType="primary" (click)="playerService.resetVotes()" style="margin-right: 2vh">新任务估时</button>
     <button nz-button nzType="danger" [disabled]="this.playerService.cardValueIsShown"
             (click)="playerService.showCards()" style="margin-right: 2vh"> 管理员点击查看估时结果
