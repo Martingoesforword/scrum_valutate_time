@@ -96,5 +96,6 @@ export class PlayerService {
       }
     });
     this.results2 = this.results2 / (this.num);
+
   }
 }

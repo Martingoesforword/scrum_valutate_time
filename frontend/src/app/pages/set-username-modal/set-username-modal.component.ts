@@ -27,9 +27,6 @@ export class SetUsernameModalComponent implements OnInit {
       this.playerService.username = value.username;
       this.isVisible = false;
       this.playerService.sendVote(0);
-      if (this.playerService.username !== '管理员') {
-        document.getElementById('rootfunc').style.visibility = 'hidden';
-      }
     }
 
   }
