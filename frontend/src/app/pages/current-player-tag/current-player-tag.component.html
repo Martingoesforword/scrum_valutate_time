@@ -1,0 +1,18 @@
+<nz-card style="width:100%" nzHoverable nzTitle="当前投票状态" [nzExtra]="extraTemplate">
+  <nz-list nzBordered nzHeader="冲刺伙伴们" *ngIf="playerService.allPlayers">
+    <nz-list-item *ngFor="let player of this.playerService.allPlayers">
+      {{ player.name }}
+      <nz-tag *ngIf="player.voteValue == 0" [nzColor]="'red'">我还没估时呢</nz-tag>
+      <nz-tag *ngIf="player.voteValue != 0" [nzColor]="'green'">我已经估时了</nz-tag>
+    </nz-list-item>
+  </nz-list>
+  <div id="rootfunc" style="margin-top: 2vh;">
+    <button nz-button nzType="primary" (click)="playerService.resetVotes()">新任务估时</button>
+    <button nz-button nzType="danger" [disabled]="this.playerService.cardValueIsShown"
+            (click)="playerService.showCards()"> 管理员点击查看估时结果
+    </button>
+    <button nz-button nzType="danger" (click)="playerService.resetGame()">新的冲刺估时</button>
+  </div>
+</nz-card>
+<ng-template #extraTemplate>
+</ng-template>

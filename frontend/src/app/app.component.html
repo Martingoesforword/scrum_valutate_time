@@ -1,0 +1,22 @@
+<nz-layout>
+  <nz-header>
+    <span *ngIf="playerService.username == null" style="color: white">网梯估时系统</span>
+    <span *ngIf="playerService.username != null " style="color: white">Hallo {{playerService.username}}! 欢迎来到网梯估时系统</span>
+  </nz-header>
+  <nz-content>
+    <app-set-username-modal></app-set-username-modal>
+    <div class="container-fluid">
+      <div nz-row style="margin-top: 5vh">
+        <div nz-col nzXs="24" nzSm="24" nzMd="14" *ngIf="!playerService.cardValueIsShown">
+          <app-vote-selection></app-vote-selection>
+        </div>
+        <div nz-col nzXs="24" nzSm="24" nzMd="14" *ngIf="playerService.cardValueIsShown">
+          <app-result></app-result>
+        </div>
+        <div nz-col nzXs="24" nzSm="24" nzMd="10">
+          <app-current-player-tag></app-current-player-tag>
+        </div>
+      </div>
+    </div>
+  </nz-content>
+</nz-layout>
