@@ -21,7 +21,7 @@ export class PlayerService {
     this.results = [];
     this.results2 = 0;
     this.num = 0;
-    this.possibleValues = [1, 2, 3, 5, 8, 13, 21];
+    this.possibleValues = [1, 2, 3, 4, 8, 12, 16, 24];
     this.currentSelfValue = 0;
 
     this.socket.on('allVotes', (info) => {

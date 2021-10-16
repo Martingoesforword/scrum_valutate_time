@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backendURL: 'http://192.168.1.100:3000'
+  backendURL: 'http://scrum.api.martinsong.org'
 };
 
 /*

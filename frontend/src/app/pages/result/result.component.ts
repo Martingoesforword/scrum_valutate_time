@@ -19,7 +19,7 @@ export class ResultComponent implements OnInit {
   legendPosition = 'below';
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA' , '#4287f5', '#d742f5', '#f56042']
+    domain: ['#ffeded', '#ff6868', '#ff0000', '#c40000' , '#be0000', '#8e0000', '#4e0000', '#000000']
   };
 
   constructor(public playerService: PlayerService) {

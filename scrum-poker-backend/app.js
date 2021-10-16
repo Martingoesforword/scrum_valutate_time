@@ -3,7 +3,7 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http, {
     cors:
         {
-            origin: 'http://192.168.1.100:4200',
+            origin: '*',
             credentials: true
         },
 
