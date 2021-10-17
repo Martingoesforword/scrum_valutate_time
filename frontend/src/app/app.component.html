@@ -1,8 +1,10 @@
 <nz-layout>
   <nz-header>
+    <div style="height: 80%;display: inline-block;line-height: 32px;margin: 0 auto;word-break: keep-all;">
     <span *ngIf="playerService.username == null" style="color: white">网梯估时系统</span>
     <span *ngIf="playerService.username != null " style="color: white">Hallo {{playerService.username}}! 欢迎来到网梯估时系统</span>
     <span *ngIf="playerService.roomId" style="color: white"> 当前房间号：{{playerService.roomId}}</span>
+    </div>
   </nz-header>
   <nz-content>
     <app-set-username-modal></app-set-username-modal>
