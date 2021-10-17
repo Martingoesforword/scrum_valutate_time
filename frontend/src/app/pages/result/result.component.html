@@ -6,10 +6,9 @@
   }
 </style>
 
-<nz-card nzHoverable style="width: 100%;" nzTitle="Results" [nzExtra]="extraTemplate">
-  <div  style="max-height: 50vh">
-  <ngx-charts-pie-chart style="height: 90%"
-    [view]="view"
+<nz-card nzHoverable style="width: 100%;max-height:100%" nzTitle="Results" [nzExtra]="extraTemplate">
+  <div  style="max-height: 50vh;" >
+  <ngx-charts-pie-chart #echart
     [scheme]="colorScheme"
     [gradient]="gradient"
     [results]="this.playerService.results"

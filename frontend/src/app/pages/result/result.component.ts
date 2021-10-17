@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {PlayerService} from '../../services/player.service';
 
 @Component({
@@ -7,9 +7,7 @@ import {PlayerService} from '../../services/player.service';
   styleUrls: ['./result.component.css']
 })
 export class ResultComponent implements OnInit {
-
   single: any[];
-  view: any[] = undefined;
 
   // options
   gradient = true;
@@ -22,12 +20,17 @@ export class ResultComponent implements OnInit {
     domain: ['#ffeded', '#ff6868', '#ff0000', '#c40000'
       , '#be0000', '#8e0000', '#4e0000', '#000000']
   };
+  @ViewChild('echart') echart;
 
   constructor(public playerService: PlayerService) {
 
   }
 
   ngOnInit() {
+  }
+  ngAfterViewInit() {
+    let self = this
+    setTimeout(()=>{self.echart.update();}, 100);
 
   }
 }
