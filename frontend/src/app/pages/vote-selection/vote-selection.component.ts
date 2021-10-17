@@ -10,14 +10,14 @@ export class VoteSelectionComponent implements OnInit {
 
 
   options = [
-    {value: 1, picUrl: 'assets/img/1.png' },
-    {value: 2, picUrl: 'assets/img/2.png' },
-    {value: 3, picUrl: 'assets/img/3.png' },
-    {value: 4, picUrl: 'assets/img/5.png' },
-    {value: 8, picUrl: 'assets/img/8.png' },
-    {value: 12, picUrl: 'assets/img/13.png' },
-    {value: 16, picUrl: 'assets/img/21.png' },
-    {value: 24, picUrl: 'assets/img/21.png' },
+    {value: 1, picUrl: 'assets/img/埃隆·马斯克.jpg' },
+    {value: 2, picUrl: 'assets/img/比尔盖茨.jpg' },
+    {value: 3, picUrl: 'assets/img/扎克伯格.jpg' },
+    {value: 4, picUrl: 'assets/img/拉里佩奇-google.jpg' },
+    {value: 8, picUrl: 'assets/img/马化腾.jpg' },
+    {value: 12, picUrl: 'assets/img/张一鸣.jpg' },
+    {value: 16, picUrl: 'assets/img/王兴.jpg' },
+    {value: 24, picUrl: 'assets/img/雷军.jpg' },
 
   ];
 
