@@ -1,18 +1,25 @@
 
-<nz-card nzHoverable style="width: 100%;" nzTitle="Results" [nzExtra]="extraTemplate">
+<style >
+  .ng-star-inserted {
+    position: relative;
+    top: -4.3vh;
+  }
+</style>
 
-  <ngx-charts-pie-chart
+<nz-card nzHoverable style="width: 100%;" nzTitle="Results" [nzExtra]="extraTemplate">
+  <div  style="max-height: 50vh">
+  <ngx-charts-pie-chart style="height: 90%"
     [view]="view"
     [scheme]="colorScheme"
-    [results]="this.playerService.results"
     [gradient]="gradient"
+    [results]="this.playerService.results"
     [legend]="showLegend"
     [legendPosition]="legendPosition"
     [labels]="showLabels"
     [doughnut]="isDoughnut"
   >
   </ngx-charts-pie-chart>
-
+  </div>
 
 </nz-card>
 <ng-template #extraTemplate>
