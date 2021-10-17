@@ -13,11 +13,11 @@ export class VoteSelectionComponent implements OnInit {
     {value: 1, picUrl: 'assets/img/1.png' },
     {value: 2, picUrl: 'assets/img/2.png' },
     {value: 3, picUrl: 'assets/img/3.png' },
-    {value: 4, picUrl: 'assets/img/5.png' },
+    {value: 5, picUrl: 'assets/img/5.png' },
     {value: 8, picUrl: 'assets/img/8.png' },
-    {value: 12, picUrl: 'assets/img/13.png' },
-    {value: 16, picUrl: 'assets/img/21.png' },
-    {value: 24, picUrl: 'assets/img/40.png' },
+    {value: 13, picUrl: 'assets/img/13.png' },
+    {value: 21, picUrl: 'assets/img/21.png' },
+    {value: 40, picUrl: 'assets/img/40.png' },
   ];
 
   constructor(public playerService: PlayerService) {
