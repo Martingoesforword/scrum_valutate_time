@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backendURL: 'http://smoothcloud.de:9001'
+  backendURL: 'http://scrum.api.martinsong.org'
 };
