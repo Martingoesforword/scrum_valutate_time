@@ -29,7 +29,7 @@ export class SetUsernameModalComponent implements OnInit {
     };
     this.hasOldUser = !!localStorage.getItem('oldUserName');
 
-    this.okText = '确定' + (this.hasOldUser ? '（点击关闭使用上一个用户）' : '');
+    this.okText = '确定';
   }
 
   ngOnInit(): void {
