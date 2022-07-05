@@ -12,7 +12,6 @@ export class SetUsernameModalComponent implements OnInit {
   usernameForm: FormGroup;
   hasOldUser: any;
   okText: any;
-  usernameFormOld: any;
   cancelText: any;
 
   constructor(public playerService: PlayerService, private fb: FormBuilder) {
@@ -22,14 +21,15 @@ export class SetUsernameModalComponent implements OnInit {
       roomId: [null, Validators.required]
     });
 
-    this.cancelText = '使用上次用户';
-    this.usernameFormOld = {
+    this.cancelText = '获取上次用户及房间号';
+    this.hasOldUser = !!localStorage.getItem('oldUserName');
+    this.okText = '确定';
+  }
+  handleHistory(): void {
+    this.usernameForm.setValue({
       username: localStorage.getItem('oldUserName'),
       roomId: localStorage.getItem('oldUserRoomId')
-    };
-    this.hasOldUser = !!localStorage.getItem('oldUserName');
-
-    this.okText = '确定';
+    })
   }
 
   ngOnInit(): void {

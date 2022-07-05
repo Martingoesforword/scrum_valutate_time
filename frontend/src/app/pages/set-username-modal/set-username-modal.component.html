@@ -1,4 +1,4 @@
-<nz-modal [(nzVisible)]="isVisible" nzTitle="请输入 你的名字 和 你想创建/加入的房间名"  [nzClosable]="false" [nzCancelDisabled]="!hasOldUser" [nzOkText]="okText" [nzCancelText]="cancelText" (nzOnCancel)="handleOk(this.usernameFormOld)" (nzOnOk)="handleOk(this.usernameForm.value)">
+<nz-modal [(nzVisible)]="isVisible" nzTitle="请输入 你的名字 和 你想创建/加入的房间名"  [nzClosable]="false" [nzCancelDisabled]="!hasOldUser" [nzOkText]="okText" [nzCancelText]="cancelText" (nzOnCancel)="handleHistory()" (nzOnOk)="handleOk(this.usernameForm.value)">
   <ng-container>
     <form nz-form (ngSubmit)="handleOk(this.usernameForm.value)" [formGroup]="usernameForm">
       <nz-form-item>
