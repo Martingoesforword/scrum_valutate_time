@@ -1,12 +1,14 @@
 const app = require('express')();
 const http = require('http').Server(app);
-const io = require('socket.io')(http, {
+const engine = require('socket.io');
+const io = engine(http, {
     cors:
         {
             origin: '*',
             credentials: true
         },
-
+    pingTimeout: 50000,
+    pingInterval: 60000
 });
 
 let rooms = {};
