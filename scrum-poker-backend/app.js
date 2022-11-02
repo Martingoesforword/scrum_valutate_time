@@ -5,7 +5,8 @@ const io = engine(http, {
     cors:
         {
             origin: '*',
-            credentials: true
+            credentials: true,
+            allowPrivateNetwork: true,
         },
     pingTimeout: 50000,
     pingInterval: 60000
