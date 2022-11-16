@@ -30,6 +30,7 @@ io.on('connection', (socket) => {
             };
             userInfo.roomId = roomId;
         }
+        socket.ownerName = userInfo.name;
         if(rooms[userInfo.roomId]) {
             if(rooms[userInfo.roomId]["allSockets"].indexOf(socket) === -1) {
                 //添加用户
@@ -119,7 +120,24 @@ function updateVote(roomId, userInfo) {
 
 function refreshVotes(roomId, manager) {
     rooms[roomId]["allSockets"].forEach(playerSocket => {
-        playerSocket.emit('allVotes', {'allVotes':rooms[roomId]["allVotes"], 'roomId':roomId, 'manager': manager});
+        if(playerSocket.ownerName === manager) {
+            playerSocket.emit('allVotes', {'allVotes':rooms[roomId]["allVotes"], 'roomId':roomId, 'manager': manager});
+        }
+        else {
+            var tempVotes = [];
+            rooms[roomId]["allVotes"].forEach(userInfo => {
+                if (userInfo.name === playerSocket.ownerName) {
+                    tempVotes.push(userInfo);
+                }
+                else {
+                    tempVotes.push({
+                        name: userInfo.name,
+                        voteValue: -1,
+                    });
+                }
+            });
+            playerSocket.emit('allVotes', {'allVotes':tempVotes, 'roomId':roomId, 'manager': manager === playerSocket.ownerName});
+        }
     })
 }
 
