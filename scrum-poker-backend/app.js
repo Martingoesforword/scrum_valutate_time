@@ -133,6 +133,7 @@ function refreshVotes(roomId, manager) {
                     tempVotes.push({
                         name: userInfo.name,
                         voteValue: -1,
+                        roomId: userInfo.roomId
                     });
                 }
             });
