@@ -51,7 +51,8 @@ io.on('connection', (socket) => {
             rooms[userInfo.roomId]["allVotes"] = {};
             refreshVotes(userInfo.roomId, rooms[userInfo.roomId]["manager"]);
 
-            for (const playerSocket of rooms[userInfo.roomId]["allSockets"]) {
+            for (const key in rooms[userInfo.roomId]["allSockets"]) {
+                var playerSocket = rooms[userInfo.roomId]["allSockets"][key];
                 playerSocket.emit('hideCards');
             }
         }
@@ -64,7 +65,8 @@ io.on('connection', (socket) => {
             return;
         }
         if(rooms[userInfo.roomId]) {
-            for (const playerSocket of rooms[userInfo.roomId]["allSockets"]) {
+            for (const key in rooms[userInfo.roomId]["allSockets"]) {
+                var playerSocket = rooms[userInfo.roomId]["allSockets"][key];
                 playerSocket.emit('showCards');
             }
         }
@@ -78,11 +80,13 @@ io.on('connection', (socket) => {
         }
         console.log('resetting all Votes');
         if(rooms[userInfo.roomId]) {
-            for (const playerVote of rooms[userInfo.roomId]["allVotes"]) {
+            for (const key in rooms[userInfo.roomId]["allVotes"]) {
+                var playerVote = rooms[userInfo.roomId]["allVotes"][key];
                 playerVote.voteValue = 0;
             }
             refreshVotes(userInfo.roomId, rooms[userInfo.roomId]["manager"]);
-            for (const playerSocket of rooms[userInfo.roomId]["allSockets"]) {
+            for (const key in rooms[userInfo.roomId]["allSockets"]) {
+                var playerSocket = rooms[userInfo.roomId]["allSockets"][key];
                 playerSocket.emit('hideCards');
             }
         }
@@ -114,7 +118,8 @@ io.on('connection', (socket) => {
 
 function checkIfUserAlreadyExists(roomId, username) {
     let result = false;
-    for (const playerVote of rooms[roomId]["allVotes"]) {
+    for (const key in rooms[roomId]["allVotes"]) {
+        var playerVote = rooms[roomId]["allVotes"][key];
         if (playerVote.name === username) {
             result = true;
         }
@@ -125,7 +130,8 @@ function checkIfUserAlreadyExists(roomId, username) {
 function updateVote(roomId, userInfo, socket) {
 
     if (checkIfUserAlreadyExists(roomId, userInfo.name)) {
-        for (const voteData of rooms[roomId]["allVotes"]) {
+        for (const key in rooms[roomId]["allVotes"]) {
+            var voteData = rooms[roomId]["allVotes"][key];
             if (voteData.name === userInfo.name) {
                 voteData.voteValue = userInfo.voteValue;
                 console.log('Vote for the user: ' + userInfo.name + ' already exists');
@@ -139,17 +145,20 @@ function updateVote(roomId, userInfo, socket) {
 
 function refreshVotes(roomId, manager) {
 
-    for (const playerSocket of rooms[roomId]["allSockets"]) {
+    for (const key in rooms[roomId]["allSockets"]) {
+        var playerSocket = rooms[roomId]["allSockets"][key];
         if(playerSocket.ownerName === manager) {
             var all_votes_array = [];
-            for (const playerVote of rooms[roomId]["allVotes"]) {
+            for (const key in rooms[roomId]["allVotes"]) {
+                var playerVote = rooms[roomId]["allVotes"][key];
                 all_votes_array.push(playerVote);
             }
             playerSocket.emit('allVotes', {'allVotes':all_votes_array, 'roomId':roomId, 'manager': manager});
         }
         else {
             var tempVotes = [];
-            for (const userInfo of rooms[roomId]["allVotes"]) {
+            for (const key in rooms[roomId]["allVotes"]) {
+                var userInfo = rooms[roomId]["allVotes"][key];
                 if (userInfo.name === playerSocket.ownerName) {
                     tempVotes.push(userInfo);
                 }
