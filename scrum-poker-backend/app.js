@@ -49,7 +49,7 @@ io.on('connection', (socket) => {
         }
         if(rooms[userInfo.roomId]) {
             rooms[userInfo.roomId]["allVotes"] = {};
-            refreshVotes(userInfo.roomId);
+            refreshVotes(userInfo.roomId, rooms[userInfo.roomId]["manager"]);
 
             for (const playerSocket of rooms[userInfo.roomId]["allSockets"]) {
                 playerSocket.emit('hideCards');
@@ -81,7 +81,7 @@ io.on('connection', (socket) => {
             for (const playerVote of rooms[userInfo.roomId]["allVotes"]) {
                 playerVote.voteValue = 0;
             }
-            refreshVotes(userInfo.roomId);
+            refreshVotes(userInfo.roomId, rooms[userInfo.roomId]["manager"]);
             for (const playerSocket of rooms[userInfo.roomId]["allSockets"]) {
                 playerSocket.emit('hideCards');
             }
@@ -106,7 +106,7 @@ io.on('connection', (socket) => {
             delete rooms[socket.roomId];
         }
         else {
-            refreshVotes(socket.roomId);
+            refreshVotes(socket.roomId, rooms[socket.roomId]["manager"]);
         }
     })
 
