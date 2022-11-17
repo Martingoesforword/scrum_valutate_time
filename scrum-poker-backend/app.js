@@ -14,12 +14,14 @@ const io = engine(http, {
 
 let rooms = {};
 
+
 io.on('connection', (socket) => {
     console.log('User connected to the socket.');
 
     //when the socket recieves a new vote
     socket.on('vote', (userInfo) => {
         // console.log(userInfo);
+        // 如果此socket中带有房间信息，判断此人重连，如果没有此房间，则以他的名义帮房主创建一个
         if((!userInfo.roomId) || (userInfo.roomId && !rooms[userInfo.roomId])) {
             //生成一个 roomId 来表示新房间号
             let roomId = userInfo.roomId || Date.now();
@@ -34,7 +36,7 @@ io.on('connection', (socket) => {
         socket.roomId = userInfo.roomId;
         if(rooms[userInfo.roomId]) {
             // 添加用户
-            rooms[userInfo.roomId]["allSockets"][socket] = true;
+            rooms[userInfo.roomId]["allSockets"][userInfo.name] = socket;
             updateVote(userInfo.roomId, userInfo, socket);
             console.log(rooms[userInfo.roomId]["allVotes"]);
             refreshVotes(userInfo.roomId, rooms[userInfo.roomId]["manager"]);
@@ -93,12 +95,12 @@ io.on('connection', (socket) => {
     })
     /**
      * 断开socket连接后，清理房间里的人，如果房间没有人了，则清理房间
-     * TODO: 有效性检查
      */
     socket.on('disconnect', () => {
+        if(!rooms[socket.roomId] || !rooms[socket.roomId]["allSockets"] || !rooms[socket.roomId]["allSockets"][socket.ownerName]) return;
         // 需要处理的数据有房间列表，房间内的投票列表，房间内的sockets连接列表
-        delete rooms[socket.roomId]["allSockets"][socket];
-        delete rooms[socket.roomId]["allVotes"][socket];
+        delete rooms[socket.roomId]["allSockets"][socket.ownerName];
+        delete rooms[socket.roomId]["allVotes"][socket.ownerName];
 
         var exist_any_one = 0;
         for (const key in rooms[socket.roomId]["allVotes"]) {
@@ -138,7 +140,7 @@ function updateVote(roomId, userInfo, socket) {
             }
         }
     } else {
-        rooms[roomId]["allVotes"][socket] = userInfo;
+        rooms[roomId]["allVotes"][userInfo.name] = userInfo;
         console.log('New vote added from user ' + userInfo.name + '.');
     }
 }
