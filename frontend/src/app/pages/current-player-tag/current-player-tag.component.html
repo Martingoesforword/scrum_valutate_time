@@ -11,7 +11,7 @@
       <nz-tag *ngIf="player.voteValue != 0" [nzColor]="'green'">
         <tag *ngIf="this.playerService.username === player.name" id="valuate_time">我估时 {{player.voteValue}} 小时</tag>
         <tag *ngIf="this.playerService.username !== this.playerService.manager && this.playerService.username !== player.name" id="valuate_time">此人已经估时了</tag>
-        <tag *ngIf="this.playerService.username === this.playerService.manager && this.playerService.username !== player.name" id="valuate_time">此人估时为 {{player.voteValue}} 小时</tag>
+        <tag *ngIf="this.playerService.username === this.playerService.manager && this.playerService.username !== player.name" id="valuate_time">此人估时为 {{!this.playerService.protectScreen ? player.voteValue: " ??? "}} 小时</tag>
       </nz-tag>
     </nz-list-item>
   </nz-list>
@@ -21,6 +21,7 @@
             (click)="playerService.showCards()" style="margin-right: 2vh"> 管理员点击查看估时结果
     </button>
     <button nz-button nzType="danger" (click)="playerService.resetGame()" style="margin-right: 2vh">重建房间</button>
+    防窥屏：<nz-switch [ngModel]="this.playerService.protectScreen" (click)="playerService.clickShow()" nzCheckedChildren="开" nzUnCheckedChildren="关"></nz-switch>
   </div>
 </nz-card>
 <ng-template #extraTemplate>

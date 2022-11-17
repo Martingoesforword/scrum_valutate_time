@@ -16,6 +16,7 @@ export class PlayerService {
   num: any;
   possibleValues: Array<number>;
   currentSelfValue: number;
+  protectScreen: boolean;
 
   constructor(private socket: Socket, private message: NzMessageService) {
     this.results = [];
@@ -23,6 +24,7 @@ export class PlayerService {
     this.num = 0;
     this.possibleValues = [0.5, 1, 2, 3, 4, 6, 9, 12];
     this.currentSelfValue = 0;
+    this.protectScreen = true;
 
     this.socket.on('allVotes', (info) => {
       this.allPlayers = info['allVotes'];
@@ -78,6 +80,10 @@ export class PlayerService {
       roomId: this.roomId
     });
     this.currentSelfValue = 0;
+  }
+
+  clickShow(): void {
+    this.protectScreen = !this.protectScreen;
   }
 
   resetVotes(): void {

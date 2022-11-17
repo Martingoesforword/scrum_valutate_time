@@ -30,6 +30,7 @@ import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import {environment} from '../environments/environment';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {NzSwitchModule} from "ng-zorro-antd/switch";
 
 
 
@@ -47,28 +48,29 @@ const config: SocketIoConfig = { url: environment.backendURL, options: {
     CurrentPlayerTagComponent,
     ResultComponent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    SocketIoModule.forRoot(config),
-    NgbModule,
-    NzInputModule,
-    NzCardModule,
-    NzMessageModule,
-    NzListModule,
-    NzIconModule,
-    NzLayoutModule,
-    NzStatisticModule,
-    NzTagModule,
-    NzModalModule,
-    NzGridModule,
-    NzButtonModule,
-    NzFormModule,
-    ReactiveFormsModule,
-    NgxChartsModule
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        SocketIoModule.forRoot(config),
+        NgbModule,
+        NzInputModule,
+        NzCardModule,
+        NzMessageModule,
+        NzListModule,
+        NzIconModule,
+        NzLayoutModule,
+        NzStatisticModule,
+        NzTagModule,
+        NzModalModule,
+        NzGridModule,
+        NzButtonModule,
+        NzFormModule,
+        ReactiveFormsModule,
+        NgxChartsModule,
+        NzSwitchModule
+    ],
   providers: [{ provide: NZ_I18N, useValue: de_DE }],
   bootstrap: [AppComponent]
 })
