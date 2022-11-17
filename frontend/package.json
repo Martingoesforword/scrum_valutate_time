@@ -6,7 +6,7 @@
     "debug": "ng serve",
     "start": "ng serve --prod",
     "start1": "ng serve",
-    "build": "ng build",
+    "build_tool_server": "ng build --prod --baseHref=/scrum/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
