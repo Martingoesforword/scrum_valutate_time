@@ -22,17 +22,7 @@ io.on('connection', (socket) => {
     socket.on('vote', (userInfo) => {
         // console.log(userInfo);
         // 如果此socket中带有房间信息，判断此人重连，如果没有此房间，则以他的名义帮房主创建一个
-        if(socket.roomId && socket.manager) {
-            let roomId = socket.roomId;
-            rooms[roomId] = {
-                manager: socket.manager,
-                allVotes: {},
-                allSockets: {}
-            };
-            userInfo.roomId = roomId;
-        }
-        // 如果没有此房间，则创建此房间，此人为房主
-        else if((!userInfo.roomId) || (userInfo.roomId && !rooms[userInfo.roomId])) {
+        if((!userInfo.roomId) || (userInfo.roomId && !rooms[userInfo.roomId])) {
             //生成一个 roomId 来表示新房间号
             let roomId = userInfo.roomId || Date.now();
             rooms[roomId] = {
@@ -46,7 +36,6 @@ io.on('connection', (socket) => {
         socket.roomId = userInfo.roomId;
         if(rooms[userInfo.roomId]) {
             // 添加用户
-            socket.manager = rooms[userInfo.roomId]["manager"];
             rooms[userInfo.roomId]["allSockets"][userInfo.name] = socket;
             updateVote(userInfo.roomId, userInfo, socket);
             console.log(rooms[userInfo.roomId]["allVotes"]);
@@ -178,7 +167,8 @@ function refreshVotes(roomId, manager) {
                 else {
                     tempVotes.push({
                         name: userInfo.name,
-                        voteValue: -1,
+                        // 如果本身为0，说明是没有投票，传0即可，如果有投票，则不是0，直接传-1即可
+                        voteValue: userInfo.voteValue === 0? 0:-1,
                         roomId: userInfo.roomId
                     });
                 }
