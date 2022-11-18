@@ -9,7 +9,7 @@
         <tag *ngIf="player.name === this.playerService.manager && player.name === this.playerService.username" id="valuate_time">我是管理员 不需要估时</tag>
       </nz-tag>
       <nz-tag *ngIf="player.voteValue != 0" [nzColor]="'green'">
-        <tag *ngIf="this.playerService.username === player.name" id="valuate_time">我估时 {{player.voteValue}} 小时</tag>
+        <tag *ngIf="this.playerService.username === player.name" id="valuate_time">我估时 {{!this.playerService.protectScreen ? player.voteValue: " ??? "}} 小时</tag>
         <tag *ngIf="this.playerService.username !== this.playerService.manager && this.playerService.username !== player.name" id="valuate_time">此人已经估时了</tag>
         <tag *ngIf="this.playerService.username === this.playerService.manager && this.playerService.username !== player.name" id="valuate_time">此人估时为 {{!this.playerService.protectScreen ? player.voteValue: " ??? "}} 小时</tag>
       </nz-tag>

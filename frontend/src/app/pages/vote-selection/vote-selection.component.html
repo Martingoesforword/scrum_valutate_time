@@ -3,7 +3,7 @@
     <img [src]="option.picUrl"
     (click)="playerService.sendVote(option.value)"
     [alt]="option.value"
-    [ngStyle]="{'border': option.value === this.playerService.currentSelfValue ? 'solid red 5px': 'none'}">
+    [ngStyle]="{'border': option.value === this.playerService.currentSelfValue && !this.playerService.protectScreen ? 'solid red 5px': 'none'}">
   </div>
 </div>
 
